@@ -1,0 +1,32 @@
+# Hecho con gusto por Leislie R. Manjarrez O.
+
+# Laboratorio 29- Funciones de dplyr- Como sumar una variable por grupo en R
+
+# En este laboratorio aprenderemos a sumar una variables dependiendo del grupo al que pertenezca
+
+# Pre-requisitos: cargar librerias
+library(data.table)
+library(dplyr)
+
+# Ubicar ruta para seleccionar datos
+choose.files()
+
+# Crear objeto con los datos ubicados con anterioridad
+data2013 <- read.csv("C:\\Users\\leisl\\OneDrive\\Doctorado\\Semestre-3\\Temas-Selectos-1-Complejidad-Económica\\Modulo2\\Semana5-Labs-Salas\\Lab-29\\greenR_2013.csv")
+
+# Leer el objeto anterior como un dataframe
+data2013 <- as.data.frame.array(data2013)
+
+# Para saber que clase de datos son
+class(data2013)
+
+# Suma de variables de forma agrupada
+resultados2013 <- data2013 %>% 
+  group_by(location_name) %>% 
+  summarise(suma_GCI_2013 = sum(GCI_2013, na.rm = T),
+            suma_GP_SINVCR = sum(GP_SINVCR, na.rm = T),
+            suma_GCP_2013 = sum(GCP_2013, na.rm = T),
+            count = n())
+
+# Ver encabezados tabla
+head(resultados2013)
